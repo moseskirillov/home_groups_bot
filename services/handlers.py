@@ -60,7 +60,7 @@ async def search_group_handler(update: Update, context: ContextTypes.DEFAULT_TYP
     user: UserModel = context.user_data.get('user')
     if user:
         found_groups = await get_all_opened_groups(update.message.text)
-        if found_groups:
+        if len(found_groups) > 0:
             for group in found_groups:
                 group_text = groups_process(group)
                 await update.message.reply_text(

@@ -126,7 +126,7 @@ async def conversation_result(update: Update, context: ContextTypes.DEFAULT_TYPE
                     .where(Group.is_open)
                     .where(Group.day == day)
                     .where(Group.age == age)
-                    .options(joinedload(Group.group_leader)))).scalars()
+                    .options(joinedload(Group.group_leader)))).scalars().fetchall()
             elif group_type == 'Тематическая':
                 found_groups = (await session.execute(
                     select(Group)
@@ -134,7 +134,7 @@ async def conversation_result(update: Update, context: ContextTypes.DEFAULT_TYPE
                     .where(Group.day == day)
                     .where(Group.age == age)
                     .where(or_(Group.type == 'Благовестие', Group.type == 'Израильская', Group.type == 'Англоязычная'))
-                    .options(joinedload(Group.group_leader)))).scalars()
+                    .options(joinedload(Group.group_leader)))).scalars().fetchall()
             else:
                 found_groups = (await session.execute(
                     select(Group)
@@ -142,7 +142,7 @@ async def conversation_result(update: Update, context: ContextTypes.DEFAULT_TYPE
                     .where(Group.day == day)
                     .where(Group.age == age)
                     .where(Group.type == group_type)
-                    .options(joinedload(Group.group_leader)))).scalars()
+                    .options(joinedload(Group.group_leader)))).scalars().fetchall()
             if found_groups:
                 logging.info('Найдены группы')
                 for group in found_groups:
