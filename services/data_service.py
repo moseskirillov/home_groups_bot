@@ -95,6 +95,9 @@ async def get_or_create_group(groups_list: list[GroupModel]) -> None:
                         'is_open': True,
                         'leader_id': new_group.leader_id
                     }])
+                else:
+                    if group.is_open is False:
+                        group.is_open = True
 
 
 async def create_regional_leader(regional_leader_name: str, group_leader: GroupLeader) -> None:
