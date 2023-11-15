@@ -125,7 +125,7 @@ async def get_all_opened_groups(metro: str):
         return result.scalars().fetchall()
 
 
-async def add_to_group(telegram_id: int, group_leader_name: str, is_youth: bool) -> GroupLeader:
+async def add_to_group(telegram_id: int, phone: str, group_leader_name: str, is_youth: bool) -> GroupLeader:
     async with async_session() as session:
         async with session.begin():
             result: Result = await session.execute(select(User).where(User.telegram_id == telegram_id))
@@ -151,6 +151,7 @@ async def add_to_group(telegram_id: int, group_leader_name: str, is_youth: bool)
                 date=datetime.now().strftime("%d.%m.%Y"),
                 first_name=user.first_name,
                 last_name=user.last_name,
+                phone=phone,
                 telegram=user.telegram_login,
                 leader_name=group_leader.name,
                 district_leader=region_leader.name

@@ -25,6 +25,7 @@ class JoinModel:
     date: str
     first_name: str
     last_name: str
+    phone: str
     telegram: str
     leader_name: str
     district_leader: str
@@ -35,6 +36,7 @@ class JoinModel:
             self.date,
             self.first_name,
             self.last_name,
+            self.phone,
             self.telegram,
             self.leader_name,
             self.district_leader,

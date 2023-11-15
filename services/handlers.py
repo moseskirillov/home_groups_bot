@@ -168,6 +168,7 @@ async def send_contact_response_handler(update: Update, context: ContextTypes.DE
             logging.info('Отправлено финальное сообщение об обратной связи')
             group_leader: GroupLeader = await add_to_group(
                 update.effective_user.id,
+                update.effective_message.contact.phone_number or 'Не определен',
                 group_leader_name,
                 context.user_data.get('home_group_is_youth') or False
             )
